@@ -1,4 +1,3 @@
-<!-- Creo el componente ElegidosComponent para mostrar los pokemones elegidos -->
 <template>
     <div>
         <h2>Pokemones Elegidos</h2>
@@ -21,9 +20,8 @@
 import { useSelectedPokemonsStore } from '../stores/selectedPokemons';
 import { useRouter } from 'vue-router';
 import { Card, Button } from 'primevue';
-//  importo nuevamente el card y el boton, porque no me los tomaba de la importacion global
 
-// exporto los componentes para que los utilice en la vista de elegidos.
+
 export default {
     components: { Card, Button },
     setup() {

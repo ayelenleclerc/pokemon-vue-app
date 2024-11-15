@@ -1,4 +1,3 @@
-<!-- Creo la vista principal de los pokemones elegidos -->
 <template>
     <div>
         <h1>Pokémon Elegidos</h1>
@@ -10,7 +9,7 @@
                 <template #content>
                     <img :src="pokemon.imagen" :alt="pokemon.nombre" class="pokemon-img" />
                     <p><strong>Tipo:</strong>
-                        <!-- Comprobación para asegurar que pokemon.tipo es un arreglo -->
+
                         {{ Array.isArray(pokemon.tipo) ? pokemon.tipo.join(', ') : pokemon.tipo }}
                     </p>
                     <p><strong>Hábitat:</strong> {{ pokemon.habitat }}</p>
@@ -38,11 +37,7 @@ export default {
     },
     setup() {
         const selectedPokemonsStore = useSelectedPokemonsStore();
-
-        // Accedemos al estado 'selected' del store
         const selectedPokemons = selectedPokemonsStore.selected;
-
-        // Función para manejar la acción de ver una evolución seleccionada (no la pude aplicar preferi dejar de mostrarlo en la vista)
         const verEvolucion = (evolucion) => {
             console.log('Ver evolución de:', evolucion);
         };

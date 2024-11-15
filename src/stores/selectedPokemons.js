@@ -1,4 +1,4 @@
-//  creo el Store para gestionar el estado global de los pokemons elegidos para mostrarlos en la vista PokemonElegido, y guardarlos en el localStorage
+
 import { defineStore } from 'pinia';
 
 export const useSelectedPokemonsStore = defineStore('selectedPokemons', {
@@ -7,11 +7,11 @@ export const useSelectedPokemonsStore = defineStore('selectedPokemons', {
   }),
   actions: {
    addPokemon(pokemon) {
-      // Comprobamos si el pokemon ya existe en la lista
-      const exists = this.selected.some(p => p.id === pokemon.id); // Asumimos que 'id' es el identificador único de cada pokemon
+
+      const exists = this.selected.some(p => p.id === pokemon.id); 
 
       if (!exists) {
-        // Si no existe, lo agregamos a la lista
+
         this.selected.push(pokemon);
         this.saveToLocalStorage();
       } else {
@@ -19,7 +19,7 @@ export const useSelectedPokemonsStore = defineStore('selectedPokemons', {
       }
       },
     saveToLocalStorage() {
-      // Guarda los Pokémon elegidos en localStorage
+
       localStorage.setItem('selectedPokemons', JSON.stringify(this.selected));
     },
     loadFromLocalStorage() {

@@ -1,4 +1,3 @@
-<!-- Creo el menu de navegación -->
 <template>
     <header class="header">
         <img class="logo" src="../assets/pokemon-Logo.svg" alt="Logo de Pokemon">
@@ -31,13 +30,20 @@ import { RouterLink } from 'vue-router';
 }
 
 .header {
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
-    color: #fff;
+
     padding: 15px;
+    position: relative;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    margin-bottom: 5px;
+
+
+
 
 
 }
@@ -63,7 +69,7 @@ import { RouterLink } from 'vue-router';
 .link {
 
     font-size: 18px;
-    color: #fff;
+    color: black;
     text-decoration: none;
 }
 </style>

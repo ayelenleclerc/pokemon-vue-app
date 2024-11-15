@@ -1,17 +1,16 @@
-// src/composables/usePokemons.js
+
 import { ref } from 'vue';
 import { getPokemon, getPokemonSpecies, getEvolutionChain } from '../services/getPokemons';
 
-// funcion composable para llevar los datos de los pokemones a las vistas.
 export function usePokemons() {
    //constantes reactivas
   const pokemons = ref([]);
   const selectedPokemon = ref(null);
   const evolutions = ref([]);
   
-  // Función para traer los datos de los pokemones para la lista 
+
   const fetchPokemonList = async () => {
-    for (let i = 1; i <= 1302; i++) { 
+    for (let i = 1; i <=Array.length ; i++) { 
       const pokemonData = await getPokemon(i);
       pokemons.value.push({
         id: pokemonData.id,
@@ -21,7 +20,7 @@ export function usePokemons() {
     }
   };
 
-  // Función para traer los datos de los pokemones para el detalle
+
   const fetchPokemonDetails = async (id) => {
     const pokemonData = await getPokemon(id);
     const speciesData = await getPokemonSpecies(pokemonData.species.name);
@@ -44,7 +43,7 @@ export function usePokemons() {
       processEvolutionChain(evolutionChainData.chain);
     }
   };
-    // Funcion que procesa los datos de las cadenas de evoluciones de los pokemones para dejar un array unidimensional.
+
   const processEvolutionChain = (chain) => {
     evolutions.value = [];
     let current = chain;

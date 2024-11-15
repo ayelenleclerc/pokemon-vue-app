@@ -1,4 +1,3 @@
-<!-- Creo la vista principal  -->
 <template>
     <div>
         <h1 class="title">Bienvenidos a Pokemon App</h1>
@@ -14,11 +13,10 @@
 </template>
 
 <script setup>
-/*Utilizo el useRouter para navegar al listado de pokemones*/
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
-/* Creo la función goToPokemonList para el Boton */
+
 const goToPokemonList = () => {
     router.push('/pokemon-list');
 }
