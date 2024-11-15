@@ -1,3 +1,4 @@
+<!-- Creo la vista principal  -->
 <template>
     <div>
         <h1 class="title">Bienvenidos a Pokemon App</h1>

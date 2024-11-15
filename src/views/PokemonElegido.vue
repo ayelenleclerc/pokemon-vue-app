@@ -1,3 +1,4 @@
+<!-- Creo la vista principal de los pokemones elegidos -->
 <template>
     <div>
         <h1>Pokémon Elegidos</h1>
@@ -41,7 +42,7 @@ export default {
         // Accedemos al estado 'selected' del store
         const selectedPokemons = selectedPokemonsStore.selected;
 
-        // Función para manejar la acción de ver una evolución seleccionada
+        // Función para manejar la acción de ver una evolución seleccionada (no la pude aplicar preferi dejar de mostrarlo en la vista)
         const verEvolucion = (evolucion) => {
             console.log('Ver evolución de:', evolucion);
         };

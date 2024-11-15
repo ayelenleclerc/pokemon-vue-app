@@ -1,4 +1,4 @@
-
+//  creo el Store para gestionar el estado global de los pokemons elegidos para mostrarlos en la vista PokemonElegido, y guardarlos en el localStorage
 import { defineStore } from 'pinia';
 
 export const useSelectedPokemonsStore = defineStore('selectedPokemons', {

@@ -1,4 +1,4 @@
-<!-- src/components/TablaComponent.vue -->
+<!-- creo la base de la tabla -->
 <template>
     <DataTable :value="pokemons" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
         tableStyle="min-width: 50rem">
@@ -19,6 +19,7 @@ import { ref, onMounted } from 'vue';
 import { usePokemons } from '../composables/usePokemon';
 import DialogComponent from './DialogComponent.vue';
 
+// exporto el componente Dialog para que lo use la vista de este componente.
 export default {
     components: { DialogComponent },
     setup() {

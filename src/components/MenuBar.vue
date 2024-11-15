@@ -1,3 +1,4 @@
+<!-- Creo el menu de navegación -->
 <template>
     <header class="header">
         <img class="logo" src="../assets/pokemon-Logo.svg" alt="Logo de Pokemon">

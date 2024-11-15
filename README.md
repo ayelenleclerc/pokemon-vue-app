@@ -2,7 +2,7 @@
 
 ### Esta App muestra el listado y los detalles de los Pokemons.
 
-Para inicializar el proyecto de Vue 3 in Vite, Siga los siguientes pasos.
+Para inicializar el proyecto de Vue3 in Vite, Siga los siguientes pasos.
 
 ## Recomendaciones para el: IDE Setup
 
@@ -30,3 +30,10 @@ npm run dev
 ```sh
 npm run build
 ```
+### Librerías que se utilizan:
+
+- [pinia](https://pinia.vuejs.org/)
+- [vue-router](https://router.vuejs.org/)
+- [primevue](https://primevue.org/)
+- [vue-devtools](https://github.com/vuejs/vue-devtools)
+- [axios](https://github.com/axios/axios)

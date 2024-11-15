@@ -6,7 +6,7 @@
 <script setup>
 import { RouterView } from 'vue-router';
 import MenuBar from './components/MenuBar.vue';
-
+//  importo el menu de navegacion para que sea global y se vea en todas las vistas
 </script>
 
 <style scoped>

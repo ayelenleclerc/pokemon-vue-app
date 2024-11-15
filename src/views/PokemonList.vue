@@ -1,4 +1,4 @@
-<!-- src/views/PokemonList.vue -->
+<!-- Creo la vista principal del listado  -->
 <template>
     <div>
         <h2>Lista de Pokemones</h2>
