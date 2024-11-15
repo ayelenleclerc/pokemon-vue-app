@@ -20,7 +20,7 @@ const router = useRouter();
 
 /* Creo la función goToPokemonList para el Boton */
 const goToPokemonList = () => {
-    router.push('/pokemons-list');
+    router.push('/pokemon-list');
 }
 </script>
 
