@@ -16,27 +16,22 @@
     </div>
 </template>
 
-<script>
-import { useSelectedPokemonsStore } from '../stores/selectedPokemons';
+<script setup>
 import { useRouter } from 'vue-router';
-import { Card, Button } from 'primevue';
+import { useSelectedPokemonsStore } from '../stores/selectedPokemons';
+import Card from 'primevue/card';
+import Button from 'primevue/button';
 
 
-export default {
-    components: { Card, Button },
-    setup() {
-        const store = useSelectedPokemonsStore();
-        const router = useRouter();
+const store = useSelectedPokemonsStore();
+const selectedPokemons = store.selected;
 
-        const viewPokemonDetails = (pokemon) => {
-            router.push({ name: 'PokemonElegido', params: { id: pokemon.id } });
-        };
 
-        return {
-            selectedPokemons: store.selected,
-            viewPokemonDetails
-        };
-    }
+const router = useRouter();
+
+
+const viewPokemonDetails = (pokemon) => {
+    router.push({ name: 'PokemonElegido', params: { id: pokemon.id } });
 };
 </script>
 

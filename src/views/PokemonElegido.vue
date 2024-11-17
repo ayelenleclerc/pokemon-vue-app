@@ -26,28 +26,12 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { useSelectedPokemonsStore } from '../stores/selectedPokemons';
-import { Card, Button } from 'primevue';
 
-export default {
-    components: {
-        Card,
-        Button,
-    },
-    setup() {
-        const selectedPokemonsStore = useSelectedPokemonsStore();
-        const selectedPokemons = selectedPokemonsStore.selected;
-        const verEvolucion = (evolucion) => {
-            console.log('Ver evolución de:', evolucion);
-        };
+const selectedPokemonsStore = useSelectedPokemonsStore();
+const selectedPokemons = selectedPokemonsStore.selected;
 
-        return {
-            selectedPokemons,
-            verEvolucion,
-        };
-    },
-};
 </script>
 
 <style scoped>

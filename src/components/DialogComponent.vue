@@ -3,35 +3,48 @@
         <h3>{{ pokemon?.nombre }}</h3>
         <img :src="pokemon?.imagen" alt="Pokemon Image" class="pokemon-img" />
         <p>Tipo: {{ pokemon?.tipo }}</p>
-        <p>Habitat: {{ pokemon?.habitat }}</p>
+        <p>Hábitat: {{ pokemon?.habitat }}</p>
         <Button class="btn" label="Elegir" icon="pi pi-check" @click="choosePokemon" />
-        <Button class="btn" label="Cancelar" icon="pi pi-trash" severity="danger" @click=" $emit('close')" />
+        <Button class="btn" label="Cancelar" icon="pi pi-trash" severity="danger" @click="closeDialog" />
     </Dialog>
 </template>
 
-<script>
-import { ref, watch } from 'vue';
+<script setup>
+import { ref, watch, defineProps, defineEmits } from 'vue';
 import { usePokemons } from '../composables/usePokemon';
 import { useSelectedPokemonsStore } from '../stores/selectedPokemons';
 
-export default {
-    props: ['id'],
-    setup(props, { emit }) {
-        const store = useSelectedPokemonsStore();
-        const { fetchPokemonDetails, selectedPokemon } = usePokemons();
-        const visible = ref(true);
 
-        watch(() => props.id, async () => {
-            await fetchPokemonDetails(props.id);
-        }, { immediate: true });
-
-        const choosePokemon = () => {
-            store.addPokemon(selectedPokemon.value);
-            emit('close');
-        };
-
-        return { pokemon: selectedPokemon, visible, choosePokemon };
+const props = defineProps({
+    id: {
+        type: Number,
+        required: true
     }
+});
+
+const emit = defineEmits(['close']);
+
+
+const visible = ref(true);
+const store = useSelectedPokemonsStore();
+const { fetchPokemonDetails, selectedPokemon } = usePokemons();
+
+
+watch(() => props.id, async (newId) => {
+    if (newId) {
+        await fetchPokemonDetails(newId);
+    }
+}, { immediate: true });
+
+
+
+const choosePokemon = () => {
+    store.addPokemon(selectedPokemon.value);
+    closeDialog();
+};
+
+const closeDialog = () => {
+    emit('close');
 };
 </script>
 
@@ -41,7 +54,6 @@ export default {
 }
 
 .btn {
-
     color: black;
     border-radius: 10px;
     padding: 0.5em;

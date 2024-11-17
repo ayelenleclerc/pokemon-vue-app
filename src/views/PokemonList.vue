@@ -1,44 +1,28 @@
 <template>
     <div>
         <h2 class="title">Lista de Pokemones</h2>
-        <TablaComponent @openDialog="openDialog" />
-        <DialogComponent v-if="showDialog" :pokemon="selectedPokemon" @close="closeDialog" />
+        <TablaComponent :pokemons="pokemons" @openDialog="handleOpenDialog" />
+        <DialogComponent v-if="showDialog" :id="selectedId" @close="showDialog = false" />
     </div>
 </template>
 
-<script>
-import { ref } from 'vue';
+<script setup>
+import { ref, onMounted } from 'vue';
 import TablaComponent from '../components/TablaComponent.vue';
 import DialogComponent from '../components/DialogComponent.vue';
+import { usePokemons } from '../composables/usePokemon';
 
-export default {
-    components: {
-        TablaComponent,
-        DialogComponent
-    },
-    setup() {
-        const showDialog = ref(false);
-        const selectedPokemon = ref(null);
+const { pokemons, fetchPokemonList } = usePokemons();
 
+const showDialog = ref(false);
+const selectedId = ref(null);
 
-        const openDialog = (pokemon) => {
-            selectedPokemon.value = pokemon;
-            showDialog.value = true;
-        };
+onMounted(fetchPokemonList);
 
-
-        const closeDialog = () => {
-            showDialog.value = false;
-            selectedPokemon.value = null;
-        };
-
-        return {
-            showDialog,
-            selectedPokemon,
-            openDialog,
-            closeDialog
-        };
-    }
+// Emitir y manejar el evento openDialog correctamente
+const handleOpenDialog = (id) => {
+    selectedId.value = id;
+    showDialog.value = true;
 };
 </script>
 

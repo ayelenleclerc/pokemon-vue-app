@@ -1,43 +1,51 @@
 <template>
+    <ProgressSpinner v-if="pokemons.length === 0" />
+
     <DataTable :value="pokemons" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
         tableStyle="min-width: 50rem">
         <Column field="id" header="ID" />
         <Column field="nombre" header="Nombre" />
         <Column field="tipo" header="Tipo" />
         <Column header="Detalle">
-            <template #body="slotProps">
-                <Button class="btn" label="Ver Detalle" @click="openDialog(slotProps.data.id)" />
+            <template #body="{ rowData }">
+                <Button @click="openDialog(rowData.id)">Ver Detalle</Button>
             </template>
         </Column>
     </DataTable>
+
     <DialogComponent v-if="showDialog" :id="selectedId" @close="closeDialog" />
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue';
 import { usePokemons } from '../composables/usePokemon';
 import DialogComponent from './DialogComponent.vue';
 
-export default {
-    components: { DialogComponent },
-    setup() {
-        const { pokemons, fetchPokemonList } = usePokemons();
-        const showDialog = ref(false);
-        const selectedId = ref(null);
+import { defineEmits } from 'vue';
+const { pokemons, fetchPokemonList } = usePokemons();
 
-        onMounted(fetchPokemonList);
 
-        const openDialog = (id) => {
-            selectedId.value = id;
-            showDialog.value = true;
-        };
+const showDialog = ref(false);
+const selectedId = ref(null);
 
-        const closeDialog = () => {
-            showDialog.value = false;
-        };
 
-        return { pokemons, showDialog, selectedId, openDialog, closeDialog };
-    }
+
+const emit = defineEmits(['openDialog']);
+
+const openDialog = (id) => {
+
+    emit('openDialog', id);
+};
+
+onMounted(fetchPokemonList);
+
+const handleOpenDialog = (id) => {
+    selectedId.value = id;
+    showDialog.value = true;
+};
+
+const closeDialog = () => {
+    showDialog.value = false;
 };
 </script>
 
