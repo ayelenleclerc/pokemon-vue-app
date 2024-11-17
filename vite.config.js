@@ -17,4 +17,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag === 'p-progress-spinner', // Excluye si Vue lo trata como custom element
+    },
+  },
 })

@@ -10,7 +10,7 @@ export function usePokemons() {
   
 
   const fetchPokemonList = async () => {
-    for (let i = 1; i <=Array.length ; i++) { 
+    for (let i = 1; i <= 1302 ; i++) { 
       const pokemonData = await getPokemon(i);
       pokemons.value.push({
         id: pokemonData.id,

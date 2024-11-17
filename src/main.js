@@ -9,10 +9,12 @@ import DataTable from 'primevue/datatable';
 import Dialog from 'primevue/dialog';
 import Column from 'primevue/column';
 import Menubar from 'primevue/menubar';
+import ProgressSpinner from 'primevue/progressspinner';
 import Card from 'primevue/card';
 import 'primeicons/primeicons.css'
 import App from './App.vue'
 import router from './router'
+
 
 const app = createApp(App)  //crea la app
 
@@ -23,6 +25,7 @@ app.component('Dialog', Dialog);
 app.component('Column', Column);
 app.component('Menubar', Menubar);
 app.component('Card', Card);
+app.component('ProgressSpinner', ProgressSpinner);
 
 // Middlewares
 app.use(createPinia()) //gestor de estados para la app
