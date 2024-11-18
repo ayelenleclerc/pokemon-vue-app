@@ -1,33 +1,33 @@
 <template>
     <div>
-        <h2 class="title">Lista de Pokemones</h2>
-        <TablaComponent :pokemons="pokemons" @openDialog="handleOpenDialog" />
-        <DialogComponent v-if="showDialog" :id="selectedId" @close="showDialog = false" />
+        <DataTable v-if="!isLoading" :value="pokemons" paginator :rows="10" :rowsPerPageOptions="[5, 10, 20, 50]"
+            tableStyle="min-width: 50rem">
+
+            <Column field="id" header="ID" />
+            <Column field="name" header="Nombre" />
+            <Column field="types" header="Tipo" />
+            <Column header="Detalle">
+                <template #body="slotProps">
+                    <Button @click="showDetails(slotProps.rowData)" label="Ver Detalle" />
+                </template>
+            </Column>
+        </DataTable>
+        <ProgressSpinner v-else />
+        <DialogComponent v-if="selectedPokemon" :pokemon="selectedPokemon" @close="selectedPokemon = null" />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import TablaComponent from '../components/TablaComponent.vue';
+import { usePokemons } from '../composables/usePokemons';
 import DialogComponent from '../components/DialogComponent.vue';
-import { usePokemons } from '../composables/usePokemon';
 
-const { pokemons, fetchPokemonList } = usePokemons();
+const { pokemons, isLoading, fetchPokemons } = usePokemons();
+const selectedPokemon = ref(null);
 
-const showDialog = ref(false);
-const selectedId = ref(null);
 
-onMounted(fetchPokemonList);
-
-// Emitir y manejar el evento openDialog correctamente
-const handleOpenDialog = (id) => {
-    selectedId.value = id;
-    showDialog.value = true;
+const showDetails = (pokemon) => {
+    selectedPokemon.value = pokemon;
 };
+onMounted(fetchPokemons)
 </script>
-
-<style scoped>
-.title {
-    text-align: center;
-}
-</style>
