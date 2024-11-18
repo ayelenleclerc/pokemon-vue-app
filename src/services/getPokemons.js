@@ -1,5 +1,5 @@
 import apiPokemon from '../api/apiPokemons';
- export const getPokemons = async () => {
+const getPokemons = async () => {
      try {
     
         const response = await apiPokemon.get(`/pokemon`);
@@ -40,7 +40,7 @@ import apiPokemon from '../api/apiPokemons';
     }
 };
 
-const getPokemonsById = async (id) => {
+ const getPokemonsById = async (id) => {
     try {
         const response = await apiPokemon.get(`/pokemon/${id}`);
         const pokemon = response.data;
@@ -51,3 +51,6 @@ const getPokemonsById = async (id) => {
         return null;
     }
 };
+
+
+export { getPokemons, getPokemonsById };

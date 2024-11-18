@@ -16,7 +16,7 @@ import App from './App.vue'
 import router from './router'
 
 
-const app = createApp(App)  //crea la app
+const app = createApp(App)  
 
 // componentes
 app.component('Button', Button);
@@ -28,8 +28,8 @@ app.component('Card', Card);
 app.component('ProgressSpinner', ProgressSpinner);
 
 // Middlewares
-app.use(createPinia()) //gestor de estados para la app
-app.use(router) //gestor de rutas
+app.use(createPinia()) 
+app.use(router) 
 app.use(PrimeVue, {
     theme: {
         preset: Aura
