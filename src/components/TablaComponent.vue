@@ -37,10 +37,10 @@
                         </p>
                     </div>
                 </div>
-                <p class="text-center m-0 text-sm">{{ }}</p>
-
-                <div><Button label="Elegir" icon="pi pi-check" class="p-button-text" @click="visible = false" />
-                    <Button label="Cerrar" icon="pi pi-times" class="p-button-text" @click="visible = false" />
+                <div>
+                    <Button label="Elegir" icon="pi pi-check" class="p-button-text" @click="elegir(pokemonId)" />
+                    <Button label="Cerrar" icon="pi pi-times" class="p-button-text" @click="visible = false"
+                        severity="danger" />
                 </div>
             </template>
         </DialogComponent>
@@ -52,6 +52,9 @@
 import { ref, onMounted } from 'vue';
 import { usePokemons } from '../composables/usePokemons';
 import DialogComponent from './DialogComponent.vue';
+import { useSelectedPokemonsStore } from '../stores/selectedPokemons';
+
+const store = useSelectedPokemonsStore();
 
 
 const { pokemons,
@@ -62,6 +65,7 @@ const visible = ref(false);
 const pokemonName = ref('');
 const pokemonImage = ref('');
 const pokemonTypes = ref('');
+const pokemonId = ref('');
 
 const pokemonHabilidades = ref('');
 const pokemonEstadisticas = ref('');
@@ -74,11 +78,20 @@ const selectToPokemon = (id) => {
         pokemonImage.value = selectedPokemon.images;
         pokemonTypes.value = selectedPokemon.types;
         pokemonHabilidades.value = selectedPokemon.habilidades;
-        pokemonEstadisticas.value = selectedPokemon.estadisticas.map(pokemon => pokemon.nombre + ': ' + pokemon.valor).join(',');
+        pokemonEstadisticas.value = selectedPokemon.estadisticas.map(pokemon => pokemon.nombre + ': ' + pokemon.valor + "\n").join(', ');
+        pokemonId.value = selectedPokemon.id;
         visible.value = true;
 
     }
 }
 onMounted(fetchPokemons);
+const elegir = (id) => {
+    const selectedPokemon = pokemons.value.find(pokemon => pokemon.id === id);
+    if (selectedPokemon) {
+        console.log('Pokemon elegido:', selectedPokemon.id);
+        store.addPokemon(selectedPokemon);
+        visible.value = false;
+    }
+}
 </script>
 <style lang="scss" scoped></style>

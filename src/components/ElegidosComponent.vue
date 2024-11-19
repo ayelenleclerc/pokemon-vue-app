@@ -8,7 +8,8 @@
                     <img :src="pokemon.imagen" alt="Pokemon Image" />
                     <p>Tipo: {{ pokemon?.tipo }}</p>
                     <p>Hábitat: {{ pokemon.habitat }}</p>
-                    <Button label="Ver Detalles" @click="viewPokemonDetails(pokemon)" />
+                    <Button label="Eliminar" @click="store.remove(pokemon.id)"></Button>
+
                 </Card>
             </div>
         </div>

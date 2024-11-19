@@ -28,5 +28,6 @@ export const useSelectedPokemonsStore = defineStore('selectedPokemons', {
         this.selected = savedPokemons;
       }
     }
+
   }
 });

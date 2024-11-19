@@ -7,13 +7,15 @@
                     {{ pokemon.nombre }}
                 </template>
                 <template #content>
-                    <img :src="pokemon.imagen" :alt="pokemon.nombre" class="pokemon-img" />
+                    <img :src="pokemon.images" :alt="pokemon.nombre" class="pokemon-img" />
                     <p><strong>Tipo:</strong>
 
                         {{ Array.isArray(pokemon.tipo) ? pokemon.tipo.join(', ') : pokemon.tipo }}
                     </p>
                     <p><strong>Hábitat:</strong> {{ pokemon.habitat }}</p>
-                    <p><strong>Habilidades:</strong> {{ pokemon.habilidades.join(', ') }}</p>
+                    <p><strong>Habilidades:</strong>
+                        {{ Array.isArray(pokemon.habilidades) ? pokemon.habilidades.join(', ') : pokemon.habilidades }}
+                    </p>
                     <p><strong>Estadísticas:</strong></p>
                     <ul>
                         <li v-for="stat in pokemon.estadisticas" :key="stat.nombre">
@@ -21,6 +23,7 @@
                         </li>
                     </ul>
                 </template>
+
             </Card>
         </div>
     </div>
