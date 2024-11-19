@@ -13,7 +13,6 @@ const getPokemons = async () => {
         const stats = pokemons.map((pokemon) => pokemon.stats);
         const height = pokemons.map((pokemon) => pokemon.height);
         const weight = pokemons.map((pokemon) => pokemon.weight);
-        const habitat = pokemons.map((pokemon) => pokemon.habitat);
         const habilidades = pokemons.map((pokemon) => pokemon.abilities.map((ability) => ability.ability.name).join(', '));
         const types = pokemons.map((pokemon) => pokemon.types.map((type) => type.type.name).join(', '));
         const estadisticas = pokemons.map((pokemon) => pokemon.stats.map((stat) => ({ nombre: stat.stat.name, valor: stat.base_stat })));
@@ -28,7 +27,6 @@ const getPokemons = async () => {
             stats: stats[index],
             height: height[index],
             weight: weight[index],
-            habitat: habitat[index],
             habilidades: habilidades[index],	
             estadisticas: estadisticas[index]
         }));

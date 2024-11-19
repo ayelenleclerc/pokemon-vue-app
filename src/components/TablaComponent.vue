@@ -3,18 +3,48 @@
         <DataTable v-if="!isLoading || pokemons.length > 0" :value="pokemons" paginator :rows="10"
             :rowsPerPageOptions="[5, 10, 20, 50]" tableStyle="min-width: 50rem">
 
-            <Column field="id" header="ID" />
-            <Column field="name" header="Nombre" />
-            <Column field="types" header="Tipo" />
-            <Column header="Detalle">
+            <Column field="id" header="ID" style="width: 25%" />
+            <Column field="name" header="Nombre" style="width: 25%" />
+            <Column field="types" header="Tipo" style="width: 25%" />
+            <Column header="Detalle" style="width: 25%">
                 <template #body="slotProps">
                     <Button icon="pi pi-search" severity="contrast" rounded aria-label="Star"
-                        @click="openDialog(slotProps.data.id)" />
+                        @click="selectToPokemon(slotProps.data.id)" />
                 </template>
             </Column>
         </DataTable>
         <ProgressSpinner v-else />
-        <DialogComponent v-if="openDialogs" :id="selectedId" @close="closeDialog" />
+        <DialogComponent v-model:visible="visible">
+            <template #body>
+                <div class="modal-body">
+                    <div class="flex justify-content-center" style="width: 100%">
+                        <p class="text-left font-bold">
+                            {{ pokemonName.toUpperCase() }}
+                        </p>
+                    </div>
+                    <div class="flex justify-content-center" style="width: 100%">
+                        <img :src="pokemonImage" alt="Pokemon Image" />
+                    </div>
+                    <div class="flex justify-content-center" style="width: 100%">
+                        <p class="text-left">
+                            Tipo: {{ pokemonTypes }}
+                        </p>
+                        <p class="text-left">
+                            Habilidades: {{ pokemonHabilidades }}
+                        </p>
+                        <p class="text-left">
+                            Estadisticas: {{ pokemonEstadisticas }}
+                        </p>
+                    </div>
+                </div>
+                <p class="text-center m-0 text-sm">{{ }}</p>
+
+                <div><Button label="Elegir" icon="pi pi-check" class="p-button-text" @click="visible = false" />
+                    <Button label="Cerrar" icon="pi pi-times" class="p-button-text" @click="visible = false" />
+                </div>
+            </template>
+        </DialogComponent>
+
     </div>
 </template>
 
@@ -26,37 +56,29 @@ import DialogComponent from './DialogComponent.vue';
 
 const { pokemons,
     isLoading,
-    fetchPokemons, fetchPokemonsDetail } = usePokemons();
-const openDialogs = ref(false);
-const selectedId = ref('');
+    fetchPokemons } = usePokemons();
 
-const selectedPokemon = ref(null);
+const visible = ref(false);
+const pokemonName = ref('');
+const pokemonImage = ref('');
+const pokemonTypes = ref('');
 
-const loadPokemon = async (id) => {
-    console.log('Cargando Pokémon con ID:', id);
-    selectedPokemon.value = await fetchPokemonsDetail(id);
+const pokemonHabilidades = ref('');
+const pokemonEstadisticas = ref('');
+const selectToPokemon = (id) => {
 
+    const selectedPokemon = pokemons.value.find(pokemon => pokemon.id === id);
 
+    if (selectedPokemon) {
+        pokemonName.value = selectedPokemon.name;
+        pokemonImage.value = selectedPokemon.images;
+        pokemonTypes.value = selectedPokemon.types;
+        pokemonHabilidades.value = selectedPokemon.habilidades;
+        pokemonEstadisticas.value = selectedPokemon.estadisticas.map(pokemon => pokemon.nombre + ': ' + pokemon.valor).join(',');
+        visible.value = true;
+
+    }
 }
-
-
-const openDialog = (id) => {
-    console.log('Abriendo diálogo para el Pokémon con ID:', id);
-    selectedId.value = id;
-
-    openDialogs.value = true;
-}
-
-
-const closeDialog = () => {
-    console.log('Cerrando diálogo');
-    selectedId.value = null;
-};
-
-onMounted(() =>
-    fetchPokemons()
-        .then(() => console.log('Lista de Pokémon cargada'))
-        .catch((error) => console.error('Error al obtener la lista de Pokémon:', error)),
-);
+onMounted(fetchPokemons);
 </script>
 <style lang="scss" scoped></style>
